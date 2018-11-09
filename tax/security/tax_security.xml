@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="0">
+        <!--增加类别-->
+        <record id="group_cn_tax_user" model="res.groups">
+            <field name="name">显示涉税功能</field>
+            <field name="comment">税务会计需要的菜单及功能都会放在这里</field>
+        </record>
+	</data>
+</odoo>

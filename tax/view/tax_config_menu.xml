@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--根菜单-->
+		<menuitem id='cn_tax_menu' name='涉税会计'  web_icon="tax,static/description/tax.png" sequence='40' groups="account.group_account_user,account.group_account_manager,account.group_account_invoice"/>
+		<menuitem id='cn_tax_accounting' name='基本业务' parent='cn_tax_menu' sequence='10'/>
+        <menuitem id='cn_tax_config_menu' name='基本设置' parent='cn_tax_menu' sequence='40'/>
+        <!-- 基础设置 -->
+        <menuitem id="menu_tax_category" name='税率设置' action="tax.tax_category_action"
+            parent="cn_tax_config_menu" sequence="10"/>
+        <menuitem id="menu_import_tax_category" name='上传航天税收分类编码文件' action="tax.tax_config_import_action"
+            parent="cn_tax_config_menu" sequence="10"/>
+
+	</data>
+</odoo>

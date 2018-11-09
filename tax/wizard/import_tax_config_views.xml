@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="import_tax_config_wizard_form">
+            <field name="name">import.tax.config.form</field>
+            <field name="model">import.tax.config</field>
+            <field name="groups_id" eval="[(4,ref('tax.group_cn_tax_user'))]"/>
+            <field name="arch" type="xml">
+                <form string="导入航天天票系统xml文件">
+                    <field name="ht_xml"/>
+
+                    <footer>
+                        <button string="导入/覆盖" name="import_data" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+       <act_window
+            name="导入税收分类xml"
+            id="tax_config_import_action"
+            multi="True"
+            key2="client_action_multi"
+            res_model="import.tax.config"
+            src_model="tax.category"
+            view_mode="form"
+            target="new"
+            view_type="form"
+            groups="tax.group_cn_tax_user"/>
+
+    </data>
+
+</odoo>

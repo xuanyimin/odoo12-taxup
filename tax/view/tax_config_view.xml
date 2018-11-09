@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <!--在产品分类上增加税收分类编码-->
+        <record id="view_product_tax_category_form" model="ir.ui.view">
+            <field name="name">tax.product.category.form.inherit</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <group name="first" position="after">
+                    <group name="tax" >
+                        <group string="税收分类编码" groups="account.group_account_user">
+                            <field name="tax_category_id"/>
+                        </group>
+                    </group>
+                </group>
+            </field>
+        </record>
+        <!--在产品上增加税收分类，增加税收分类编码与由系统增加-->
+        <record id="tax_product_template_form_view" model="ir.ui.view">
+            <field name="name">tax.product.template.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="priority">6</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <page name="inventory" position="after">
+                    <page string="涉税" name="tax" groups="account.group_account_user">
+                        <group name="是否由系统生成">
+                            <group string="由系统生成的产品">
+                                <field name="computer_import"
+                                    groups="account.group_account_user"/>
+                            </group>
+                            <group string="税收分类编码" >
+                                <field name="tax_category_id"
+                                    groups="account.group_account_user"/>
+                            </group>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+        <!--税收分类编码tree-->
+        <record id="view_cn_tax_category_tree" model="ir.ui.view">
+            <field name="name">tax.category.tree</field>
+            <field name="model">tax.category</field>
+            <field name="arch" type="xml">
+                <tree string="税收分类编码">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="print_name"/>
+                    <field name="superior"/>
+                    <field name="can_use"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_cn_tax_category_form" model="ir.ui.view">
+            <field name="name">tax.category.form</field>
+            <field name="model">tax.category</field>
+            <field name="arch" type="xml">
+                <form string="tax" class="o_invoice_form">
+                    <sheet>
+                        <group col="4">
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="print_name"/>
+                            <field name="superior"/>
+                            <field name="can_use"/>
+                            <field name="note"/>
+                            <field name="help"/>
+                            <field name="tax_rate"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+	</data>
+</odoo>
