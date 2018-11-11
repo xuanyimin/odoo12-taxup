@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="invoice_form_cancel_inherit" model="ir.ui.view">
-        <field name="name">invoice.form.cancel.inherit</field>
+    <record id="invoice_tax_xml_inherit" model="ir.ui.view">
+        <field name="name">invoice.tax.xml.inherit</field>
         <field name="model">account.invoice</field>
         <field name="inherit_id" ref="account.invoice_form"/>
         <field name="arch" type="xml">
             <xpath expr="//button[@name='action_invoice_draft']" position="before">
                 <button name="create_tax_xml" type="object" states="open,paid" string="生成发票xml" groups="tax.group_cn_tax_user"/>
             </xpath>
+            <xpath expr="//sheet/div" position="after">
+                <div class="oe_button_box">
+                    <button name="action_get_attachment_view"
+                        class="oe_stat_button"
+                        groups="tax.group_cn_tax_user"
+                        icon="fa-book"
+                        type="object">
+                        <field name="attachment_number" widget="statinfo" string="附件" groups="tax.group_cn_tax_user"/>
+                    </button>
+                </div>
+            </xpath>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="tax_invoice_company_form_inherit">
+        <field name="name">tax.invoice.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="tax_invoice_top"/>
+            </xpath>
+        </field>
+    </record>
+
 </odoo>

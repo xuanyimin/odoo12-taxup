@@ -49,7 +49,10 @@ class AccountInvoice(models.Model):
     @api.multi
     def create_tax_xml(self):
         # 处理XML头
-        invoice_top = 100000
+        '''
+           todo:外贸开票，电子发票
+        '''
+        invoice_top = self.env['res.company'].search([]).tax_invoice_top #发票上限
         amount = 0
         number = 1
         line_number = 0
@@ -64,22 +67,22 @@ class AccountInvoice(models.Model):
                 amount += line.price_subtotal
                 self.tax_line(line, line_number,Fp)
             else:
+                #超上限拆分
                 amount = line_number = 0
                 number += 1
                 Fp = self.tax_top(number,Fpxx)
                 amount += line.price_subtotal
                 self.tax_line(line, line_number,Fp)
         tree = etree.ElementTree(Kp)
-        tree.write('./xml/tax_invoice.xml', pretty_print=True, xml_declaration= True, encoding='GBK')
+        tree.write('./xml/tax_invoice.xml', pretty_print=True, xml_declaration= True, encoding='GBK') #此目录要是共享可以自动开票
         f = open('./xml/tax_invoice.xml','rb')
         self.env['ir.attachment'].create({
             'datas': base64.b64encode(f.read()),
             'name': '航天发票xml',
-            'datas_fname': '%s航天xml.xml'%(self.number),
+            'datas_fname': '%s发票xml.xml'%(self.number),
             'res_model': 'account.invoice',
             'res_id': self.id,
         })
-
 
     @api.multi
     def tax_top(self,number,Fpxx):
@@ -92,7 +95,7 @@ class AccountInvoice(models.Model):
         Fpsj = etree.SubElement(Fpxx, 'Fpsj')
         Fp = etree.SubElement(Fpsj, 'Fp')
         Djh = etree.SubElement(Fp, 'Djh')  # 单据号
-        Djh.text = '%s' % (self.id)
+        Djh.text = '%s-%s' % (self.id,number)
         Spbmbbh = etree.SubElement(Fp, 'Spbmbbh')  # 商品编码版本号
         Spbmbbh.text = '19.0'
         Hsbz = etree.SubElement(Fp, 'Hsbz')  # 含税标志
@@ -154,3 +157,9 @@ class AccountInvoice(models.Model):
         Qyspbm.text = line.product_id.default_code
         Jldw = etree.SubElement(Sph, 'Jldw')  # 计量单位
         Jldw.text = line.product_id.uom_id.name
+
+
+class ResCompany(models.Model):
+    _inherit = "res.company"
+
+    tax_invoice_top = fields.Monetary(string='开票上限', default=100000)
