@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="invoice_form_cancel_inherit" model="ir.ui.view">
+        <field name="name">invoice.form.cancel.inherit</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_invoice_draft']" position="before">
+                <button name="create_tax_xml" type="object" states="open,paid" string="生成发票xml" groups="tax.group_cn_tax_user"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
