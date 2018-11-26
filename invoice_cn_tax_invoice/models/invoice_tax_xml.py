@@ -52,7 +52,7 @@ class AccountInvoice(models.Model):
         '''
            todo:外贸开票，电子发票
         '''
-        invoice_top = self.env['res.company'].search([]).tax_invoice_top #发票上限
+        invoice_top = self.env.user.company_id.tax_invoice_top #发票上限
         amount = 0
         number = 1
         line_number = 0

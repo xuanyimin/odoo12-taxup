@@ -3,7 +3,7 @@
     <data>
         <!-- 菜单加入税务模块 -->
         <menuitem id="menu_cn_account_invoice" name='发票' action="cn_account_invoice_action"
-            parent="tax.cn_tax_accounting" sequence="0"/>
+            parent="tax.cn_tax_accounting" sequence="10"/>
 
     </data>
 </odoo>

@@ -32,7 +32,7 @@
                                 <field name="partner_address_in" string ="供应商地址电话"  attrs="{'invisible': [('type', '=', 'out')]}"/>
                                 <field name="partner_bank_number_out" string ="客户银行及帐号"  attrs="{'invisible': [('type', '=', 'in')]}"/>
                                 <field name="partner_bank_number_in" string ="供应商银行及帐号"  attrs="{'invisible': [('type', '=', 'out')]}"/>
-                                <field name="invoice_confirm_date"/>
+                                <field name="invoice_confirm_date" attrs="{'invisible': [('type', '=', 'out')]}"/>
                             </group>
                             <group>
                                 <field name="invoice_type" required="1"/>
