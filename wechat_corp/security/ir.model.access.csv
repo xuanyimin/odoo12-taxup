@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_wechat_wechat,wechat.wechat,model_wechat_corp_config,,1,1,1,1
+access_wechat_corp_users,wechat.corp.users,model_wechat_corp_users,,1,1,1,1
+access_wxcorp_messages,wxcorp.messages,model_wxcorp_messages,,1,1,1,1
+access_wechat_corp_totag,wechat.corp.totag,model_wechat_corp_totag,,1,1,1,1
