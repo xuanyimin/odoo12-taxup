@@ -1,0 +1,9 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- 菜单加入税务模块 -->
+        <menuitem id="menu_bank_acceptance_bill" name='银承汇票' action="bank_acceptance_bill_action"
+            parent="tax.cn_tax_accounting" sequence="0"/>
+
+    </data>
+</odoo>

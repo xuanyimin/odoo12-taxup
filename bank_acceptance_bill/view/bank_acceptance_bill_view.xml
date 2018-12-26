@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!--开具银承汇票tree-->
+        <record id='bank_acceptance_bill_tree' model='ir.ui.view'>
+			<field name='name'>bank.acceptance.bill.tree</field>
+			<field name='model'>bank.acceptance.bill</field>
+			<field name='arch' type='xml'>
+				<tree string='银承汇票'>
+                    <field name='date'/>
+                    <field name="name" />
+                    <field name="state"/>
+				</tree>
+			</field>
+		</record>
+		<!--开具银承汇票from-->
+		<record id='bank_acceptance_bill_form' model='ir.ui.view'>
+			<field name='name'>bank.acceptance.bill.form</field>
+			<field name='model'>bank.acceptance.bill</field>
+			<field name='arch' type='xml'>
+                <form string="银承汇票">
+                    <header>
+                        <button name='invoice_to_bill' string="查找发票" type="object" class="oe_highlight" states="draft,pending"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,pending,done"/>
+                    </header>
+			    	<sheet>
+						<group>
+							<field name="date"/>
+                            <field name="end_date"/>
+                        </group>
+                        <group>
+                            <field name="name" options="{'no_create': True}" domain="[('partner_id', '=', partner_id)]"/>
+                            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                            <field name="partner_id" invisible="1" />
+                        </group>
+                        <notebook>
+                            <page string="银承汇票明细">
+                                <field name="line_ids">
+                                    <tree string="明细行" editable="bottom">
+                                        <field name="name" domain="[('supplier', '=', True)]"/>
+                                        <field name="partner_name" invisible="1"/>
+                                        <field name="amount"/>
+                                        <field name="invoice_ids" widget="many2many_tags" domain="[('partner_name_in', '=', partner_name)]" readonly = '1'/>
+                                        <field name="invoice_amount" readonly = '1'/>
+                                        <field name="note" readonly = '1'/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+			</field>
+		</record>
+
+	</data>
+</odoo>
