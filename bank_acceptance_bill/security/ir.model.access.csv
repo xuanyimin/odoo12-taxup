@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bank_acceptance_bill,access_bank_acceptance_bill,model_bank_acceptance_bill,,1,1,1,1
+access_bank_acceptance_bill_line,access_bank_acceptance_bill_line,model_bank_acceptance_bill_line,,1,1,1,1
